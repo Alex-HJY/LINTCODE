@@ -3,33 +3,52 @@
 #include <math.h>
 #include <algorithm>
 #include <stdlib.h>
+#include <vector>
 using namespace std;
 
 class Solution {
 public:
 	/*
-	* @param root: The root of binary tree.
-	* @return: True if this Binary tree is Balanced, or false.
+	* @param A: a string
+	* @param B: a string
+	* @return: a boolean
 	*/
-	bool isBalanced(TreeNode * root) {
-		// write your code here
-		int i = getdepth(root);
-		if (i>=0) return 1;
-		return -1;
+	void Qsort(string &a, int low, int high)
+	{
+		if (low >= high) {
+			return;
+		}
+		int first = low;
+		int end = high;
+		int key = a[first];
+		while (first < end) {
+			while ((first<end)&&(a[end]>=key))
+			{
+				--end;
+			}
+			a[first] = a[end];
+			while ((first<end) && (a[first] <= key))
+			{
+				++first;
+			}
+			a[end] = a[first];
+		}
+		a[first] = key;
+		Qsort(a, first + 1, high);
+		Qsort(a, low, first - 1);
 	}
-	int getdepth(TreeNode *root) {
-		if (root == NULL) { return 0; }
-		int i = getdepth(root->left);
-		int j = getdepth(root->right);
-		if (i == -1) return -1;
-		if (j == -1) return -1;
-		if (abs(i-j)<=1) return max(i, j) + 1;
+
+	bool Permutation(string &A, string &B) {
+		// write your code here
+		qsort(&A,A.length()-1,sizeof(A[0]),compare);
+
+		return !strcmp(A.c_str(), B.c_str());
 	}
 };
 
 
-
 int main() {
+
 	return 0;
 }
 
