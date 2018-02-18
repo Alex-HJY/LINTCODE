@@ -1,25 +1,15 @@
-#include <iostream>
-#include <string>
-#include <math.h>
-#include <algorithm>
-#include <stdlib.h>
-#include <vector>
-#include <queue>
-#include <unordered_map>
-#include <unordered_set>
-using namespace std;
-
-
-
-class TreeNode {
-public:
-	int val;
-	TreeNode *left, *right;
-	TreeNode(int val) {
-		this->val = val;
-		this->left = this->right = NULL;
-	}
-};
+/**
+* Definition of TreeNode:
+* class TreeNode {
+* public:
+*     int val;
+*     TreeNode *left, *right;
+*     TreeNode(int val) {
+*         this->val = val;
+*         this->left = this->right = NULL;
+*     }
+* }
+*/
 
 
 class Solution {
@@ -31,7 +21,7 @@ public:
 	queue<TreeNode*> q;
 	queue<int> level;
 	vector<vector<int>> ans;
-	
+
 	vector<vector<int>> levelOrder(TreeNode * root) {
 		// write your code here
 		if (root) {
@@ -43,10 +33,10 @@ public:
 				q.pop();
 				int t = level.front();
 				level.pop();
-				
-				if (ans.size() < t+1) {
+
+				if (ans.size() < t + 1) {
 					vector<int> ttt;
-					ans.push_back( ttt);
+					ans.push_back(ttt);
 				}
 				ans[t].push_back(node->val);
 				if (node->left) {
@@ -59,15 +49,6 @@ public:
 				}
 			}
 		}
-		reverse(ans.begin(), ans.end());
 		return ans;
 	}
 };
-
-
-int main() {
-
-	return 0;
-}
-
-
