@@ -25,45 +25,33 @@ public:
 class Solution {
 public:
 	/*
-	* @param root: A Tree
-	* @return: Level order a list of lists of integer
+	* @param root: a TreeNode, the root of the binary tree
+	* @return:
 	*/
-	queue<TreeNode*> q;
-	queue<int> level;
-	vector<vector<int>> ans;
-	
-	vector<vector<int>> levelOrder(TreeNode * root) {
+	TreeNode *dfs(TreeNode *node) {
+		if ((!node->left) && (!node->right)) return node;
+		TreeNode *l = node->left;
+		TreeNode *r = node->right;
+		TreeNode *temp;
+		if (l) {
+			temp = dfs(l);
+			node->right = l;
+			temp->right = r;
+		}
+		node->left= NULL;
+		if (r) {
+			return dfs(r);
+		}
+		return (temp);
+
+	}
+	void flatten(TreeNode * root) {
 		// write your code here
 		if (root) {
-			q.push(root);
-			level.push(0);
-
-			while (!q.empty()) {
-				TreeNode *node = q.front();
-				q.pop();
-				int t = level.front();
-				level.pop();
-				
-				if (ans.size() < t+1) {
-					vector<int> ttt;
-					ans.push_back( ttt);
-				}
-				ans[t].push_back(node->val);
-				if (node->left) {
-					q.push(node->left);
-					level.push(t + 1);
-				}
-				if (node->right) {
-					q.push(node->right);
-					level.push(t + 1);
-				}
-			}
+			dfs(root);
 		}
-		reverse(ans.begin(), ans.end());
-		return ans;
 	}
 };
-
 
 int main() {
 
