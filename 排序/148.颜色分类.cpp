@@ -5,7 +5,6 @@ public:
 	* @return: nothing
 	*/
 	void Qsort(vector<int> &a, int low, int high) {
-		int mid = (low + high) / 2;
 		if  (low < high) {
 			int first = low;
 			int last = high;
